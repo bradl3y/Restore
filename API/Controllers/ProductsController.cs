@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace API.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/[controller]")] // https://localhost:5001/api/products
     [ApiController]
     public class ProductsController(StoreContext context) : ControllerBase
     {
@@ -16,11 +16,13 @@ namespace API.Controllers
             return await context.Products.ToListAsync();
         }
 
-        [HttpGet("{id}")] // GET api/products/5
+        [HttpGet("{id}")] // api/products/2
         public async Task<ActionResult<Product>> GetProduct(int id)
         {
             var product = await context.Products.FindAsync(id);
+
             if (product == null) return NotFound();
+
             return product;
         }
     }

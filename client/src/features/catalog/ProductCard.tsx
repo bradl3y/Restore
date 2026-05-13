@@ -1,5 +1,6 @@
 import { Button, Card, CardActions, CardContent, CardMedia, Typography } from "@mui/material"
-import type { Product } from "../../app/models/product"
+import { Product } from "../../app/models/product"
+import { Link } from "react-router-dom"
 
 type Props = {
     product: Product
@@ -23,9 +24,9 @@ export default function ProductCard({product}: Props) {
             title={product.name}
         />
         <CardContent>
-            <Typography
+            <Typography 
                 gutterBottom
-                sx={{textTransform: 'uppercase'}}
+                sx={{textTransform: 'uppercase'}} 
                 variant="subtitle2">
                     {product.name}
             </Typography>
@@ -40,7 +41,7 @@ export default function ProductCard({product}: Props) {
             sx={{justifyContent: 'space-between'}}
         >
             <Button>Add to cart</Button>
-            <Button>View</Button>
+            <Button component={Link} to={`/catalog/${product.id}`}>View</Button>
         </CardActions>
     </Card>
   )

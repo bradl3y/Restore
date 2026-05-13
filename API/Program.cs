@@ -4,9 +4,8 @@ using Microsoft.EntityFrameworkCore;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-
 builder.Services.AddControllers();
-builder.Services.AddDbContext<StoreContext>(opt =>
+builder.Services.AddDbContext<StoreContext>(opt => 
 {
     opt.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection"));
 });
@@ -14,14 +13,14 @@ builder.Services.AddCors();
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline (middleware).
-app.UseCors(opt =>
+// Configure the HTTP request pipeline.
+app.UseCors(opt => 
 {
     opt.AllowAnyHeader().AllowAnyMethod().WithOrigins("https://localhost:3000");
 });
 
 app.MapControllers();
 
-DBInitializer.InitDb(app);
+DbInitializer.InitDb(app);
 
 app.Run();
